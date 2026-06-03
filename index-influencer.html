@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FundLab για Influencers — Βρες deals με τοπικούς επαγγελματίες</title>
+  <meta name="description" content="Marketplace επαληθευμένων προσφορών από τοπικούς επαγγελματίες. Apply με ένα tap, παρέδωσε content, χτίσε reputation. Δωρεάν για creators 5K–500K followers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Influencer page warm accent overrides */
+    .inf-badge { background: rgba(255,46,77,0.10); border-color: rgba(255,46,77,0.20); color: #ff2e4d; }
+    .inf-badge .dot { background: #ff2e4d; box-shadow: 0 0 10px #ff2e4d; }
+    .role-switch {
+      font-size: 13px; color: #94a3b8;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .role-switch a { color: #2451ff; font-weight: 600; text-decoration: none; }
+    .role-switch a:hover { text-decoration: underline; }
+    .perk-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .perk {
+      background: rgba(255,122,26,0.06);
+      border: 1px solid rgba(255,122,26,0.14);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .perk-ico {
+      font-size: 26px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .perk h4 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: #0b1437; margin-bottom: 4px; }
+    .perk p { font-size: 13px; color: #475569; line-height: 1.5; }
+    .niche-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .niche-tag {
+      font-size: 12px; font-weight: 700;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,122,26,0.25);
+      background: rgba(255,122,26,0.08);
+      color: #ff7a1a;
+    }
+    .timeline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 640px;
+      margin: 40px auto 0;
+    }
+    .tl-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 20px;
+      align-items: flex-start;
+      padding-bottom: 32px;
+      position: relative;
+    }
+    .tl-step:last-child { padding-bottom: 0; }
+    .tl-dot {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff7a1a, #ff2e4d);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 6px 18px rgba(255,122,26,0.30);
+    }
+    .tl-step:not(:last-child) .tl-dot::after {
+      content: '';
+      position: absolute;
+      top: 44px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: calc(100% + 32px - 44px);
+      background: linear-gradient(to bottom, rgba(255,122,26,0.35), rgba(255,122,26,0.08));
+    }
+    .tl-content { padding-top: 10px; }
+    .tl-content h4 { font-size: 17px; font-family: 'Outfit', sans-serif; font-weight: 700; color: #0b1437; margin-bottom: 4px; }
+    .tl-content p { font-size: 14px; color: #475569; line-height: 1.6; }
+    .earnings-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .earning-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .earning-card .e-val {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800; font-size: 32px;
+      background: linear-gradient(135deg, #ff7a1a, #ff2e4d);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block; margin-bottom: 4px;
+    }
+    .earning-card .e-label { font-size: 13px; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">◆</span>
+        <span class="brand-name">FundLab</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#how">Πώς λειτουργεί</a>
+        <a href="#benefits">Τι κερδίζεις</a>
+        <a href="#trust">Ασφάλεια</a>
+        <a href="#faq">FAQ</a>
+        <a href="dashboard-influencer.html" style="color:var(--brand);font-weight:700;">Dashboard →</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="role-switch">Είσαι επαγγελματίας; <a href="index-professional.html">Δες τη δική σου σελίδα →</a></span>
+        <a href="#cta" class="btn btn-warm btn-sm">Early Access</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg class="blob blob-1" viewBox="0 0 600 600" aria-hidden="true">
+        <path fill="url(#g1)" d="M421,318Q396,386,329,420Q262,454,196,418Q130,382,99,316Q68,250,108,189Q148,128,219,109Q290,90,355,127Q420,164,433,207Q446,250,421,318Z"/>
+        <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#ff9a3c"/><stop offset="100%" stop-color="#ff2e4d"/></linearGradient></defs>
+      </svg>
+      <svg class="blob blob-2" viewBox="0 0 600 600" aria-hidden="true">
+        <path fill="url(#g2)" d="M453,324Q422,398,348,438Q274,478,201,438Q128,398,99,324Q70,250,108,182Q146,114,222,92Q298,70,367,103Q436,136,457,193Q478,250,453,324Z"/>
+        <defs><linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#ff7a1a"/><stop offset="100%" stop-color="#ffb27a"/></linearGradient></defs>
+      </svg>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="badge inf-badge">
+          <span class="dot"></span>
+          Για creators 5K–500K followers
+        </span>
+        <h1 class="hero-title">
+          Κέρδισε πραγματικές υπηρεσίες<br/>
+          κάνοντας αυτό που <span class="grad-warm">ήδη κάνεις.</span>
+        </h1>
+        <p class="hero-sub">
+          Marketplace επαληθευμένων προσφορών από τοπικούς επαγγελματίες. Apply με ένα tap — τα stats σου πάνε αυτόματα. Χτίσε reputation deal by deal.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-warm btn-lg">Μπες στη λίστα early access</a>
+          <a href="dashboard-influencer.html" class="btn btn-ghost btn-lg">Δες το dashboard →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>0€</strong><span>commission</span></div>
+          <div class="stat"><strong>1 tap</strong><span>να κάνεις apply</span></div>
+          <div class="stat"><strong>auto</strong><span>media kit</span></div>
+        </div>
+      </div>
+
+      <div class="hero-phone" aria-hidden="true">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-top">
+              <div class="phone-brand"><span>◆</span> FundLab</div>
+              <div class="phone-dot"></div>
+            </div>
+            <div class="phone-tab">Marketplace</div>
+
+            <div class="offer-card offer-1">
+              <div class="offer-head">
+                <div class="avatar av-blue">DR</div>
+                <div>
+                  <div class="offer-name">Dr. Παπαδοπούλου</div>
+                  <div class="offer-meta">Οδοντίατρος · Κολωνάκι</div>
+                </div>
+                <div class="offer-value">€300</div>
+              </div>
+              <div class="offer-title">Δωρεάν λεύκανση δοντιών</div>
+              <div class="offer-tags">
+                <span class="tag">1 Reel</span><span class="tag">3 Stories</span>
+              </div>
+              <div class="offer-cta">Apply τώρα</div>
+            </div>
+
+            <div class="offer-card offer-2">
+              <div class="offer-head">
+                <div class="avatar av-orange">FT</div>
+                <div>
+                  <div class="offer-name">FitStudio Athens</div>
+                  <div class="offer-meta">PT · Γλυφάδα</div>
+                </div>
+                <div class="offer-value">€180</div>
+              </div>
+              <div class="offer-title">3 personal training sessions</div>
+              <div class="offer-tags">
+                <span class="tag">1 Reel</span><span class="tag">TikTok</span>
+              </div>
+              <div class="offer-cta">Apply τώρα</div>
+            </div>
+          </div>
+        </div>
+        <div class="float-pill pill-1" style="color:#ff7a1a;">📊 Verified προσφορές</div>
+        <div class="float-pill pill-2" style="color:#ff2e4d;">★ 4.9 rating</div>
+      </div>
+    </div>
+    <svg class="section-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#f7f8fc"/>
+    </svg>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff7a1a;">Το πρόβλημα</span>
+      <h2 class="section-title">Ευκαιρίες υπάρχουν.<br/>Δομή δεν υπάρχει.</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">😤</div>
+          <h3>Deals χωρίς προστασία</h3>
+          <p>Συμφωνείς με έναν επαγγελματία, ανεβάζεις content — και μετά; Κανένα συμβόλαιο, καμία λογοδοτεία, καμία απόδειξη ότι έγινε η συμφωνία.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📉</div>
+          <h3>Μηδέν reputation, μηδέν leverage</h3>
+          <p>Κάθε deal ξεκινάς από το μηδέν. Δεν υπάρχει τρόπος να αποδείξεις ότι είσαι αξιόπιστος — ούτε για τον επαγγελματία, αλλά ούτε για το επόμενο deal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section section-dark has-wave-top" id="solution">
+    <svg class="wave wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,30 C1080,90 720,0 360,40 C200,60 80,50 0,40 Z" fill="#f7f8fc"/>
+    </svg>
+    <div class="container">
+      <span class="eyebrow">Η λύση</span>
+      <h2 class="section-title">Το FundLab είναι η υποδομή<br/>που λείπει από τα deals σου.</h2>
+      <p class="section-lead">
+        Ένα marketplace όπου βρίσκεις επαληθευμένους επαγγελματίες, κάνεις apply αυτόματα, και κάθε deal χτίζει το reputation σου.
+      </p>
+      <div class="grid-3">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <h3>Marketplace με αξία</h3>
+          <p>Προσφορές από γιατρούς, PTs, αισθητικούς — υπηρεσίες που θα πλήρωνες ούτως ή άλλως. Τώρα τις κερδίζεις με content.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <h3>Apply σε 1 tap</h3>
+          <p>Τα stats σου τραβιούνται live από Instagram & TikTok και πάνε αυτόματα στον επαγγελματία. Μηδέν PDFs, μηδέν χειροκίνητη υποβολή.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <h3>Reputation που μένει</h3>
+          <p>Κάθε ολοκληρωμένο deal προσθέτει rating στο profile σου. Ένα score που σε κάνει πιο ζητούμενο στο επόμενο deal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="container" style="max-width:860px;">
+      <span class="eyebrow" style="color:#ff7a1a;">Πώς λειτουργεί</span>
+      <h2 class="section-title">6 βήματα. Εντελώς αυτόματα.</h2>
+
+      <div class="timeline-steps">
+        <div class="tl-step">
+          <div class="tl-dot">1</div>
+          <div class="tl-content">
+            <h4>Συνδέεις το Instagram & TikTok</h4>
+            <p>Μέσω OAuth API. Το auto-generated media kit σου είναι έτοιμο σε δευτερόλεπτα — followers, engagement, reach, niche tags. Μηδέν χειροκίνητη δουλειά.</p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">2</div>
+          <div class="tl-content">
+            <h4>Βλέπεις το marketplace & φιλτράρεις</h4>
+            <p>Επιλέγεις κατά niche (Beauty, Health, Fitness, Lifestyle, Food) και πόλη. Κάθε προσφορά δείχνει την υπηρεσία, την αξία σε €, και τι ζητάει σε αντάλλαγμα.</p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">3</div>
+          <div class="tl-content">
+            <h4>Apply με ένα tap</h4>
+            <p>Τα stats σου στέλνονται αυτόματα. Ο επαγγελματίας βλέπει το profile σου, επαληθευμένα. Καμία φασαρία, καμία αδιαφανής διαδικασία.</p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">4</div>
+          <div class="tl-content">
+            <h4>Match & κλείσιμο ραντεβού</h4>
+            <p>Αν επιλεχτείς, in-app chat για να κλείσετε ραντεβού. Όλα timestamped. Ο επαγγελματίας έχει λόγο να σεβαστεί τη συμφωνία — και εσύ επίσης.</p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">5</div>
+          <div class="tl-content">
+            <h4>Υπηρεσία & content σε 48h</h4>
+            <p>Check-in στο ραντεβού. Παραλαμβάνεις την υπηρεσία. Ανεβάζεις το content και το σύστημα επαληθεύει αυτόματα το link του post.</p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-dot">6</div>
+          <div class="tl-content">
+            <h4>Αμοιβαίο rating</h4>
+            <p>Δίνεις και παίρνεις rating. Το reputation σου ανεβαίνει. Στο επόμενο deal έχεις ήδη αποδείξει ότι αξίζεις τη θέση σου στο marketplace.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section section-dark has-wave-top" id="benefits">
+    <svg class="wave wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,40 C1080,80 720,10 360,50 C200,70 80,55 0,30 Z" fill="#f7f8fc"/>
+    </svg>
+    <div class="container">
+      <span class="eyebrow">Τι κερδίζεις</span>
+      <h2 class="section-title">Αξία σε κάθε deal.</h2>
+      <p class="section-lead">Δεν είναι μόνο η υπηρεσία που κερδίζεις — είναι ο τρόπος που εξελίσσεσαι σαν creator.</p>
+
+      <div class="perk-row">
+        <div class="perk">
+          <div class="perk-ico">🦷</div>
+          <div>
+            <h4>Υπηρεσίες αξίας €150–€500</h4>
+            <p>Λεύκανση, personal training, διαιτολόγος, αισθητική — πράγματα που θα πλήρωνες ούτως ή άλλως.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-ico">📊</div>
+          <div>
+            <h4>Auto-generated media kit</h4>
+            <p>Live stats, niche tags, reputation score — πάντα ενημερωμένο, πάντα έτοιμο να μοιραστείς.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-ico">⭐</div>
+          <div>
+            <h4>Reputation score</h4>
+            <p>Ένα score που χτίζεται από ratings επαγγελματιών. Ανοίγει πόρτες σε καλύτερα deals.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-ico">🛡</div>
+          <div>
+            <h4>Προστασία συμφωνίας</h4>
+            <p>Αν ο επαγγελματίας δεν τηρήσει τη συμφωνία, υπάρχει dispute flow και strike system.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-ico">📍</div>
+          <div>
+            <h4>Τοπικά deals, πραγματικοί άνθρωποι</h4>
+            <p>Αθήνα, Θεσσαλονίκη, και επόμενες πόλεις. Deals κοντά σου, με επαγγελματίες που ξέρεις.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-ico">📸</div>
+          <div>
+            <h4>Content που σε αντιπροσωπεύει</h4>
+            <p>Φυσικό content — υπηρεσίες που χρησιμοποιείς στη ζωή σου. Ό,τι πιο authentic υπάρχει.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;">
+        <p style="color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Niches στο marketplace</p>
+        <div class="niche-tags">
+          <span class="niche-tag">🌸 Beauty</span>
+          <span class="niche-tag">💪 Fitness</span>
+          <span class="niche-tag">🥗 Nutrition</span>
+          <span class="niche-tag">✨ Wellness</span>
+          <span class="niche-tag">🍽 Food</span>
+          <span class="niche-tag">👗 Lifestyle</span>
+          <span class="niche-tag">🦷 Dental</span>
+          <span class="niche-tag">🏃 Sports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="section" id="trust">
+    <div class="container">
+      <div class="trust-grid">
+        <div>
+          <span class="eyebrow" style="color:#ff7a1a;">Ασφάλεια</span>
+          <h2 class="section-title">Οι επαγγελματίες<br/>λογοδοτούν επίσης.</h2>
+          <p class="section-lead">Δεν είσαι εσύ μόνο που αξιολογείται. Κάθε επαγγελματίας στο FundLab έχει verified profile, ιστορικό deals, και δημόσιο score.</p>
+          <div class="trust-mini">
+            <div class="trust-card">
+              <div class="trust-ico" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">✓</div>
+              <h4>Verified επαγγελματίες</h4>
+              <p>Εγγεγραμμένοι με επαγγελματικό ΑΦΜ & τοποθεσία</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-ico" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">★</div>
+              <h4>Public reputation</h4>
+              <p>Score & reviews από άλλους influencers</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-ico" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">⚠</div>
+              <h4>Strike system</h4>
+              <p>Επαγγελματίας που ακυρώνει παίρνει strike</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-ico" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">⚖</div>
+              <h4>Dispute flow</h4>
+              <p>Αν κάτι πάει στραβά, έχεις που να απευθυνθείς</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kit-wrap" aria-hidden="true">
+          <div class="kit-card">
+            <div class="kit-cover" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);"></div>
+            <div class="kit-avatar">MK</div>
+            <div class="kit-body">
+              <div class="kit-name">Μαρία Κωνσταντίνου</div>
+              <div class="kit-handle">@maria.k · Αθήνα</div>
+              <div class="kit-tags">
+                <span class="tag" style="background:rgba(255,122,26,0.10);color:#ff7a1a;">Beauty</span>
+                <span class="tag" style="background:rgba(255,122,26,0.10);color:#ff7a1a;">Lifestyle</span>
+                <span class="tag" style="background:rgba(255,122,26,0.10);color:#ff7a1a;">Wellness</span>
+              </div>
+              <div class="kit-stats">
+                <div class="kit-stat"><strong style="color:#ff7a1a;">48.2K</strong><span>Followers</span></div>
+                <div class="kit-stat"><strong style="color:#ff7a1a;">5.8%</strong><span>Engagement</span></div>
+                <div class="kit-stat"><strong style="color:#ff7a1a;">12.4K</strong><span>Reach</span></div>
+              </div>
+              <div class="kit-row">
+                <span class="kit-label">Rating</span>
+                <span class="kit-stars">★★★★★ <small>4.9</small></span>
+              </div>
+              <div class="kit-row">
+                <span class="kit-label">Deals</span>
+                <span class="kit-pill" style="background:rgba(255,122,26,0.10);color:#ff7a1a;">14 ολοκληρωμένα</span>
+              </div>
+              <div class="kit-verified" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">✓ Auto-generated Media Kit</div>
+            </div>
+          </div>
+          <div class="float-pill kit-pill-1" style="color:#ff7a1a;">📈 Live stats</div>
+          <div class="float-pill kit-pill-2" style="color:#ff2e4d;">🔒 Protected deal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section class="section section-dark has-wave-top" id="markets">
+    <svg class="wave wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,30 C1080,70 720,20 360,50 C200,65 80,55 0,40 Z" fill="#f7f8fc"/>
+    </svg>
+    <div class="container center">
+      <span class="eyebrow">Launch</span>
+      <h2 class="section-title">Ξεκινάμε στην <span class="grad-warm">Αθήνα & Θεσσαλονίκη</span>.</h2>
+      <p class="section-lead">Επόμενες πόλεις: Πάτρα, Ηράκλειο, Λάρισα. Κάνε early access και μπες πρώτος στο marketplace της πόλης σου.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="cta-card" style="background:linear-gradient(135deg,#2d0a00 0%,#7a1a0a 50%,#2d0a2d 100%);">
+        <span class="badge badge-light" style="background:rgba(255,122,26,0.15);border-color:rgba(255,122,26,0.30);color:#ffb27a;">
+          <span class="dot"></span> Early Access για Creators
+        </span>
+        <h2>Βρες τα πρώτα σου deals νωρίτερα.</h2>
+        <p>Μπες στη λίστα και θα είσαι από τους πρώτους influencers στο marketplace όταν ανοίξει η πόλη σου.</p>
+
+        <form id="early-form" class="form" novalidate>
+          <div class="role-toggle">
+            <label class="role-opt">
+              <input type="radio" name="role" value="professional" />
+              <span>🏥 Επαγγελματίας</span>
+            </label>
+            <label class="role-opt">
+              <input type="radio" name="role" value="influencer" checked />
+              <span>📸 Influencer</span>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <input type="email" name="email" placeholder="το@email.σου" required />
+            <select name="city" required>
+              <option value="">Πόλη</option>
+              <option>Αθήνα</option>
+              <option>Θεσσαλονίκη</option>
+              <option>Πάτρα</option>
+              <option>Ηράκλειο</option>
+              <option>Λάρισα</option>
+              <option>Άλλη</option>
+            </select>
+            <button type="submit" class="btn btn-warm">Μπες στη λίστα</button>
+          </div>
+          <p class="form-fine">Δεν στέλνουμε spam. Μόνο ένα email όταν ανοίγει η πλατφόρμα.</p>
+        </form>
+
+        <div id="form-success" class="form-success" hidden>
+          <div class="check" style="background:linear-gradient(135deg,#ff7a1a,#ff2e4d);">✓</div>
+          <h3>Είσαι μέσα!</h3>
+          <p>Θα σου στείλουμε email μόλις ανοίξει η πόλη σου. Ευχαριστούμε που πιστεύεις στο FundLab.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff7a1a;">Συχνές ερωτήσεις</span>
+      <h2 class="section-title">FAQ για Influencers</h2>
+      <div class="faq">
+        <details><summary>Χρειάζομαι minimum followers;</summary><p>Ναι, το κατώτατο όριο είναι 5.000 followers σε Instagram ή TikTok. Πάνω από 500K; Επικοινώνησε μαζί μας για special onboarding.</p></details>
+        <details><summary>Πώς επαληθεύονται τα stats μου;</summary><p>Μέσω OAuth API της Instagram και TikTok. Συνδέεις τον λογαριασμό σου μία φορά και τα νούμερα τραβιούνται live. Δεν χρειάζεται να ανεβάσεις τίποτα χειροκίνητα.</p></details>
+        <details><summary>Τι content ζητάνε οι επαγγελματίες;</summary><p>Κάθε προσφορά ορίζει ακριβώς τι ζητάει: π.χ. «1 Reel + 3 Stories». Συμφωνείς πριν κάνεις apply. Δεν υπάρχουν εκπλήξεις μετά.</p></details>
+        <details><summary>Τι γίνεται αν ο επαγγελματίας ακυρώσει;</summary><p>Παίρνει strike. Αν ακυρώσει 3 φορές, αποβάλλεται. Εσύ ειδοποιείσαι άμεσα και το slot γυρνάει στο marketplace ως νέα θέση.</p></details>
+        <details><summary>Μπορώ να κάνω deals σε πολλές πόλεις;</summary><p>Ναι, αλλά κάθε deal απαιτεί φυσική παρουσία για το ραντεβού. Το marketplace φιλτράρει αυτόματα κατά πόλη.</p></details>
+        <details><summary>Είναι δωρεάν για πάντα;</summary><p>Η είσοδος και η χρήση της πλατφόρμας είναι δωρεάν. Δεν υπάρχει commission από deals. Αν αλλάξει κάτι, θα σε ενημερώσουμε πριν.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <span class="brand-mark">◆</span>
+        <span class="brand-name">FundLab</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">← Αλλαγή ρόλου</a>
+        <a href="index-professional.html">Σελίδα επαγγελματία</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:hello@fundlab.gr">Επικοινωνία</a>
+      </div>
+      <div class="footer-copy">© 2026 FundLab — Made with ◆ in Greece</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
