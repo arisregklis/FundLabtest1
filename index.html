@@ -102,7 +102,7 @@
     .choose-card.pro:hover { border-color: #2451ff; box-shadow: 0 24px 64px rgba(36,81,255,0.18); }
     .choose-card.inf:hover { border-color: #ff7a1a; box-shadow: 0 24px 64px rgba(255,122,26,0.18); }
 
-    .choose-card-icon { font-size: 54px; margin-bottom: 18px; display: block; }
+    .choose-card-icon { margin-bottom: 18px; display: flex; justify-content: center; }
     .choose-card-badge {
       display: inline-block;
       font-family: 'Outfit', sans-serif;
@@ -179,7 +179,6 @@
         <span>FundLab</span>
       </a>
       <div class="nav-right">
-        <a href="dashboard.html" class="dash-link">Dashboard →</a>
       </div>
     </nav>
 
@@ -191,29 +190,39 @@
       <div class="choose-cards">
 
         <a href="index-professional.html" class="choose-card pro">
-          <span class="choose-card-icon">🏥</span>
-          <span class="choose-card-badge">Επαγγελματίας</span>
-          <h2>Γιατρός, PT, Αισθητικός…</h2>
-          <p>Θες social proof από influencers χωρίς agencies, χωρίς χρήματα, χωρίς ghosting.</p>
+          <span class="choose-card-icon">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="56" height="56" rx="16" fill="rgba(36,81,255,0.10)"/>
+              <path d="M28 15.5c-2.9 2.7-6.8 4.4-11 4.4-.4 1.1-.6 2.3-.6 3.6 0 7 4.8 12.9 11.6 14.5 6.8-1.6 11.6-7.5 11.6-14.5 0-1.3-.2-2.5-.6-3.6-4.2 0-8.1-1.7-11-4.4z" stroke="#2451ff" stroke-width="2" stroke-linejoin="round" fill="none"/>
+              <path d="M24.5 28l2.5 2.5 5-5" stroke="#2451ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="choose-card-badge">Επαγγελματίας Υγείας&Ευεξίας</span>
+          <h2></h2>
+          <p>Ψηφιακή σύσταση</p>
           <ul>
-            <li>Πώς βρίσκεις επαληθευμένους creators</li>
-            <li>Γιατί δεν υπάρχει ghosting ποτέ</li>
-            <li>Πώς παίρνεις content σε 48h</li>
-            <li>Κόστος για σένα: 0€</li>
+            
+            <li>Αποτελεσματικός τρόπος προώθησης</li>
+            <li>Νομική Συμμόρφωση</li>
+            <li>Όλα σε ένα μέρος</li>
           </ul>
           <span class="choose-cta">Είμαι επαγγελματίας →</span>
         </a>
 
         <a href="index-influencer.html" class="choose-card inf">
-          <span class="choose-card-icon">📸</span>
+          <span class="choose-card-icon">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="56" height="56" rx="16" fill="rgba(255,122,26,0.10)"/>
+              <path d="M30.5 15.5L20 29h10l-4.5 11.5 16-18H31l-.5-7z" stroke="#ff7a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </span>
           <span class="choose-card-badge">Influencer</span>
-          <h2>Creator 5K–500K followers</h2>
-          <p>Θες πραγματικά τοπικά deals με αξιόπιστους επαγγελματίες — χωρίς φασαρία.</p>
+          <h2></h2>
+          <p>Χορηγία σε είδος.</p>
           <ul>
-            <li>Πώς βρίσκεις deals που ταιριάζουν σε σένα</li>
-            <li>Πώς το media kit σου δημιουργείται αυτόματα</li>
-            <li>Πώς χτίζεις reputation deal by deal</li>
-            <li>Κόστος για σένα: 0€</li>
+            <li>Αξιόπιστα</li>
+            <li>Γρήγορα</li>
+            <li>Όλη η εμπειρία σε ένα μέρος</li>
           </ul>
           <span class="choose-cta">Είμαι influencer →</span>
         </a>
@@ -222,7 +231,7 @@
     </div>
 
     <div class="choose-footer">
-      Ήδη ξέρεις το FundLab; <a href="dashboard.html">Πήγαινε στο dashboard →</a>
+      <a href="mailto:info@fundlab.gr">info@fundlab.gr</a>
     </div>
 
   </div>
